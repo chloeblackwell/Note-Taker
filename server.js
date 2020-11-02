@@ -58,7 +58,6 @@ app.get("/api/notes", function (req, res) {
 app.post("/api/notes", function (req, res) {
 
     try {
-        // Reads the db.json file 
         notesInput = fs.readFileSync("./db/db.json", "utf8");
 
         notesInput = JSON.parse(notesInput)
