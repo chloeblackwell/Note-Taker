@@ -10,9 +10,6 @@ const PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
-
 app.use(express.static(path.join(__dirname, "public")));
 
 
@@ -49,7 +46,7 @@ app.get("/api/notes", function (req, res) {
 
         // Error handling 
     } catch (err) {
-        console.log(err);
+        throw err;
     }
     //   Send json object to browser 
     res.json(notesInput);
@@ -103,16 +100,16 @@ app.delete("/api/notes/:id", function (req, res) {
 
 
         // Delete existing note from noteData array 
-        notesInput = notesInput.filter(function (note) {
+        notesInput = notesInput.filter((note => {
             return note.id != req.params.id;
-        });
+        }));
 
         notesInput = JSON.stringify(notesInput);
 
-        fs.writeFile("./db/db.json", notesInput, "utf8", function (err) {
+        fs.writeFile("./db/db.json", notesInput, "utf8", (err => {
 
             if (err) throw err;
-        });
+        }));
 
         res.send(JSON.parse(notesInput));
 
