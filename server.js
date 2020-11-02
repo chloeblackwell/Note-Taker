@@ -44,7 +44,7 @@ app.get("/api/notes", function (req, res) {
         // Parse notesInput so it is an array of objects
         notesInput = JSON.parse(notesInput)
 
-        // Error handling 
+
     } catch (err) {
         throw err;
     }
